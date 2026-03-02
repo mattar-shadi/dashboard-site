@@ -3,6 +3,37 @@ const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('overlay');
 const body = document.body;
 
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  if (theme === 'dark') {
+    themeIcon.className = 'fas fa-moon';
+    themeToggle.setAttribute('aria-label', 'Passer en mode clair');
+  } else {
+    themeIcon.className = 'fas fa-sun';
+    themeToggle.setAttribute('aria-label', 'Passer en mode sombre');
+  }
+}
+
+// Sync icon with current theme on page load
+applyTheme(document.documentElement.getAttribute('data-theme') || 'dark');
+
+themeToggle.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  applyTheme(current === 'dark' ? 'light' : 'dark');
+});
+
+// Listen to OS theme change (if no saved preference)
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  if (!localStorage.getItem('theme')) {
+    applyTheme(e.matches ? 'dark' : 'light');
+  }
+});
+
 // Toggle Logic
 function toggleSidebar() {
   if (window.innerWidth > 992) {
