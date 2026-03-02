@@ -13,6 +13,8 @@ function toggleSidebar() {
     sidebar.classList.toggle('open');
     overlay.classList.toggle('active');
   }
+  const isOpen = sidebar.classList.contains('open') || !body.classList.contains('sidebar-closed');
+  hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
 }
 
 hamburgerBtn.addEventListener('click', toggleSidebar);
@@ -135,8 +137,9 @@ navLinks.forEach(link => {
     if (!section) return;
 
     // Update active nav link
-    navLinks.forEach(l => l.classList.remove('active'));
+    navLinks.forEach(l => { l.classList.remove('active'); l.removeAttribute('aria-current'); });
     link.classList.add('active');
+    link.setAttribute('aria-current', 'page');
 
     // Show corresponding section, hide others
     sections.forEach(s => s.classList.remove('active'));

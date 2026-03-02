@@ -28,8 +28,8 @@
       <i class="fas fa-bolt"></i>
       <span>Nexus<span style="color:var(--primary)">Dash</span></span>
     </div>
-    <nav class="nav-menu">
-      <a href="#" class="nav-link active" data-section="dashboard"><i class="fas fa-th-large"></i> Dashboard</a>
+    <nav class="nav-menu" role="navigation" aria-label="Menu principal">
+      <a href="#" class="nav-link active" data-section="dashboard" aria-current="page"><i class="fas fa-th-large"></i> Dashboard</a>
       <a href="#" class="nav-link" data-section="analytics"><i class="fas fa-chart-line"></i> Analytics</a>
       <a href="#" class="nav-link" data-section="clients"><i class="fas fa-users"></i> Clients</a>
       <a href="#" class="nav-link" data-section="commandes"><i class="fas fa-shopping-bag"></i> Commandes</a>
@@ -45,7 +45,7 @@
   <div class="main-wrapper">
     <header>
       <div class="header-left">
-        <button class="hamburger-btn" id="hamburgerBtn" title="Basculer le menu">
+        <button class="hamburger-btn" id="hamburgerBtn" title="Basculer le menu" aria-label="Basculer le menu" aria-expanded="false" aria-controls="sidebar">
           <i class="fas fa-bars"></i>
         </button>
         <div class="search-box" style="display: none;"> <!-- Hidden for now -->
@@ -58,7 +58,7 @@
           <span class="name">Thomas Martin</span>
           <span class="role">Admin Principal</span>
         </div>
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Photo de profil de Thomas Martin">
       </div>
     </header>
 
@@ -127,6 +127,7 @@
             <h3 style="font-size: 1.1rem;">Dernières Transactions</h3>
             <div class="table-responsive">
               <table>
+                <caption class="sr-only">Dernières Transactions</caption>
                 <thead>
                   <tr><th>Client</th><th>Montant</th><th>Statut</th></tr>
                 </thead>
@@ -209,6 +210,7 @@
           <h3 style="font-size: 1.1rem;">Liste des Clients</h3>
           <div class="table-responsive">
             <table>
+              <caption class="sr-only">Liste des Clients</caption>
               <thead>
                 <tr><th>Nom</th><th>Email</th><th>Date d'inscription</th><th>Statut</th></tr>
               </thead>
@@ -255,6 +257,7 @@
           <h3 style="font-size: 1.1rem;">Liste des Commandes</h3>
           <div class="table-responsive">
             <table>
+              <caption class="sr-only">Liste des Commandes</caption>
               <thead>
                 <tr><th>ID</th><th>Client</th><th>Produit</th><th>Montant</th><th>Statut</th></tr>
               </thead>
@@ -339,11 +342,11 @@
           <form style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; max-width: 500px;">
             <div>
               <label for="display-name" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Nom d'affichage</label>
-              <input id="display-name" type="text" value="Thomas Martin" style="width: 100%; padding: 0.75rem 1rem; background: var(--bg-dark); border: 1px solid #334155; border-radius: 10px; color: var(--text); font-family: inherit; font-size: 0.95rem;">
+              <input id="display-name" type="text" value="Thomas Martin" autocomplete="name" aria-required="true" style="width: 100%; padding: 0.75rem 1rem; background: var(--bg-dark); border: 1px solid #334155; border-radius: 10px; color: var(--text); font-family: inherit; font-size: 0.95rem;">
             </div>
             <div>
               <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Email</label>
-              <input id="email" type="email" value="thomas@example.com" style="width: 100%; padding: 0.75rem 1rem; background: var(--bg-dark); border: 1px solid #334155; border-radius: 10px; color: var(--text); font-family: inherit; font-size: 0.95rem;">
+              <input id="email" type="email" value="thomas@example.com" autocomplete="email" aria-required="true" style="width: 100%; padding: 0.75rem 1rem; background: var(--bg-dark); border: 1px solid #334155; border-radius: 10px; color: var(--text); font-family: inherit; font-size: 0.95rem;">
             </div>
             <div>
               <label for="language" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Langue</label>
