@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard Moderne 2026 - Responsive & Interactif</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <title>Dashboard Moderne 2026 - Corrigé</title>
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   
   <style>
     :root {
-      --primary: #6366f1;       /* indigo */
+      --primary: #6366f1;
       --primary-dark: #4f46e5;
-      --primary-light: #818cf8;
       --bg-dark: #0f172a;
       --bg-sidebar: #111827;
       --bg-card: #1e293b;
@@ -20,35 +22,18 @@
       --success: #10b981;
       --danger: #ef4444;
       --warning: #f59e0b;
-      --info: #06b6d4;
       --sidebar-width: 260px;
       --header-height: 70px;
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition: all 0.3s ease;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background: var(--bg-dark);
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
-    }
-
-    /* LAYOUT STRUCTURE */
-    .app-container {
-      display: flex;
-      min-height: 100vh;
     }
 
     /* SIDEBAR */
@@ -57,10 +42,8 @@
       background: var(--bg-sidebar);
       border-right: 1px solid #1e293b;
       position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 1000;
+      top: 0; bottom: 0; left: 0;
+      z-index: 1001;
       transition: var(--transition);
       display: flex;
       flex-direction: column;
@@ -68,62 +51,32 @@
 
     .logo {
       height: var(--header-height);
-      display: flex;
-      align-items: center;
+      display: flex; align-items: center;
       padding: 0 1.5rem;
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: white;
-      letter-spacing: -0.5px;
+      font-size: 1.4rem; font-weight: 800; color: white;
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
+    .logo i { color: var(--primary); margin-right: 0.75rem; }
 
-    .logo i {
-      color: var(--primary);
-      margin-right: 0.75rem;
-      font-size: 1.75rem;
-    }
-
-    .nav-menu {
-      padding: 1.5rem 0.75rem;
-      flex: 1;
-      overflow-y: auto;
-    }
-
+    .nav-menu { padding: 1.5rem 0.75rem; flex: 1; }
     .nav-link {
-      display: flex;
-      align-items: center;
-      padding: 0.85rem 1rem;
+      display: flex; align-items: center;
+      padding: 0.8rem 1rem;
       color: var(--text-muted);
       text-decoration: none;
       font-weight: 500;
       border-radius: 8px;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.3rem;
       transition: var(--transition);
     }
+    .nav-link:hover, .nav-link.active { background: rgba(99, 102, 241, 0.1); color: white; }
+    .nav-link.active { background: var(--primary); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); }
+    .nav-link i { width: 24px; margin-right: 0.8rem; text-align: center; }
 
-    .nav-link:hover, .nav-link.active {
-      background: rgba(99, 102, 241, 0.1);
-      color: white;
-    }
-
-    .nav-link.active {
-      background: var(--primary);
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-    }
-
-    .nav-link i {
-      width: 24px;
-      margin-right: 0.75rem;
-      font-size: 1.1rem;
-      text-align: center;
-    }
-
-    /* MAIN CONTENT AREA */
+    /* MAIN CONTENT */
     .main-wrapper {
-      flex: 1;
       margin-left: var(--sidebar-width);
-      min-width: 0; /* Important for flex child overflow */
+      min-height: 100vh;
       transition: var(--transition);
     }
 
@@ -131,461 +84,152 @@
     header {
       height: var(--header-height);
       background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid #1e293b;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 900;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 1.5rem;
+      position: sticky; top: 0; z-index: 1000;
     }
 
+    /* MOBILE TOGGLE BUTTON - ALWAYS VISIBLE ON SMALL SCREENS */
     .mobile-toggle {
       display: none;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    .search-bar {
-      position: relative;
-      max-width: 400px;
-      width: 100%;
-    }
-
-    .search-bar input {
-      width: 100%;
-      background: #1e293b;
-      border: 1px solid #334155;
-      padding: 0.6rem 1rem 0.6rem 2.5rem;
-      border-radius: 10px;
-      color: white;
-      font-size: 0.9rem;
-      transition: var(--transition);
-    }
-
-    .search-bar i {
-      position: absolute;
-      left: 0.9rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .icon-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1.2rem;
-      cursor: pointer;
-      position: relative;
-      transition: var(--transition);
-    }
-
-    .icon-btn:hover { color: white; }
-    .badge {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      background: var(--danger);
-      color: white;
-      font-size: 0.65rem;
-      padding: 2px 5px;
-      border-radius: 10px;
-      border: 2px solid var(--bg-dark);
-    }
-
-    .user-profile {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      cursor: pointer;
-    }
-
-    .user-profile img {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 2px solid var(--primary);
-    }
-
-    .user-info { display: block; }
-    .user-info .name { font-weight: 600; font-size: 0.9rem; display: block; }
-    .user-info .role { font-size: 0.75rem; color: var(--text-muted); }
-
-    /* DASHBOARD CONTENT */
-    main {
-      padding: 2rem;
-      max-width: 1600px;
-      margin: 0 auto;
-    }
-
-    .welcome-header {
-      margin-bottom: 2rem;
-    }
-
-    .welcome-header h1 {
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-    }
-
-    /* GRID SYSTEM */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .card {
       background: var(--bg-card);
       border: 1px solid #334155;
-      border-radius: 16px;
-      padding: 1.5rem;
-      transition: var(--transition);
+      color: white;
+      padding: 0.5rem 0.7rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.2rem;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3);
-      border-color: var(--primary);
-    }
+    .user-profile { display: flex; align-items: center; gap: 0.8rem; }
+    .user-profile img { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--primary); }
 
-    .stat-card {
-      display: flex;
-      flex-direction: column;
-    }
+    main { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; margin-bottom: 1.5rem; }
 
-    .stat-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1rem;
-    }
-
-    .stat-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-    }
-
-    .stat-value { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .stat-label { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
-    .stat-trend { font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.25rem; }
-
-    /* CHARTS SECTION */
-    .content-grid {
+    /* GRID & CARDS */
+    .stats-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem; margin-bottom: 2rem;
     }
+    .card { background: var(--bg-card); border: 1px solid #334155; border-radius: 12px; padding: 1.2rem; }
+    .stat-val { font-size: 1.6rem; font-weight: 700; display: block; margin: 0.5rem 0; }
+    .stat-label { color: var(--text-muted); font-size: 0.9rem; }
 
-    .chart-card { height: 400px; display: flex; flex-direction: column; }
-    .chart-card h2 { font-size: 1.1rem; margin-bottom: 1.5rem; }
-    .chart-wrapper { flex: 1; min-height: 0; position: relative; }
-
-    /* TABLE SECTION */
-    .table-card {
-      overflow: hidden;
+    .content-grid {
+      display: grid; grid-template-columns: 2fr 1fr; gap: 1.2rem;
     }
+    .chart-container { height: 300px; position: relative; margin-top: 1rem; }
 
-    .table-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-    }
+    /* TABLE */
+    .table-responsive { overflow-x: auto; margin-top: 1rem; }
+    table { width: 100%; border-collapse: collapse; min-width: 500px; }
+    th { text-align: left; padding: 0.8rem; color: var(--text-muted); border-bottom: 1px solid #334155; font-size: 0.8rem; text-transform: uppercase; }
+    td { padding: 0.8rem; border-bottom: 1px solid rgba(51, 65, 85, 0.5); font-size: 0.9rem; }
 
-    .table-responsive {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 600px;
-    }
-
-    th {
-      text-align: left;
-      padding: 1rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-bottom: 1px solid #334155;
-    }
-
-    td {
-      padding: 1rem;
-      border-bottom: 1px solid rgba(51, 65, 85, 0.5);
-      font-size: 0.95rem;
-    }
-
-    tr:last-child td { border-bottom: none; }
-
-    .status-pill {
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .status-paid { background: rgba(16, 185, 129, 0.15); color: var(--success); }
-    .status-pending { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
-    .status-failed { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
-
-    /* RESPONSIVE BREAKPOINTS */
-    @media (max-width: 1200px) {
+    /* MOBILE RESPONSIVENESS */
+    @media (max-width: 992px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .main-wrapper { margin-left: 0; }
+      .mobile-toggle { display: block; }
       .content-grid { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 992px) {
-      .sidebar {
-        transform: translateX(-100%);
-      }
-      .sidebar.open {
-        transform: translateX(0);
-      }
-      .main-wrapper {
-        margin-left: 0;
-      }
-      .mobile-toggle {
-        display: block;
-      }
-      header {
-        padding: 0 1rem;
-      }
-      .search-bar {
-        max-width: 200px;
-      }
-      .user-info {
-        display: none;
-      }
-    }
-
-    @media (max-width: 640px) {
-      main { padding: 1rem; }
-      .stats-grid { grid-template-columns: 1fr; }
-      .search-bar { display: none; }
-      .welcome-header h1 { font-size: 1.5rem; }
-      .card { padding: 1.25rem; }
-      .stat-value { font-size: 1.5rem; }
-      .chart-card { height: 300px; }
-    }
-
-    /* OVERLAY FOR MOBILE */
-    .sidebar-overlay {
+    /* OVERLAY */
+    .overlay {
       display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(4px);
-      z-index: 999;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6); z-index: 1000;
     }
-    .sidebar-overlay.active { display: block; }
+    .overlay.active { display: block; }
 
   </style>
 </head>
 <body>
 
-  <div class="app-container">
-    <!-- OVERLAY -->
-    <div class="sidebar-overlay" id="overlay"></div>
+  <div class="overlay" id="overlay"></div>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar">
-      <div class="logo">
-        <i class="fas fa-chart-line"></i>
-        <span>DashBoard</span>
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">
+      <i class="fas fa-chart-line"></i>
+      <span>DashBoard</span>
+    </div>
+    <nav class="nav-menu">
+      <a href="#" class="nav-link active"><i class="fas fa-home"></i> Accueil</a>
+      <a href="#" class="nav-link"><i class="fas fa-chart-pie"></i> Statistiques</a>
+      <a href="#" class="nav-link"><i class="fas fa-users"></i> Clients</a>
+      <a href="#" class="nav-link"><i class="fas fa-shopping-cart"></i> Commandes</a>
+      <a href="#" class="nav-link"><i class="fas fa-cog"></i> Paramètres</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main-wrapper">
+    <header>
+      <button class="mobile-toggle" id="menuBtn">
+        <i class="fas fa-bars"></i> Menu
+      </button>
+      <div class="user-profile">
+        <span style="font-size: 0.9rem; font-weight: 500;">Thomas Martin</span>
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
       </div>
-      
-      <nav class="nav-menu">
-        <a href="#" class="nav-link active"><i class="fas fa-grid-2"></i> Dashboard</a>
-        <a href="#" class="nav-link"><i class="fas fa-chart-pie"></i> Analytics</a>
-        <a href="#" class="nav-link"><i class="fas fa-users"></i> Clients</a>
-        <a href="#" class="nav-link"><i class="fas fa-shopping-bag"></i> Commandes</a>
-        <a href="#" class="nav-link"><i class="fas fa-credit-card"></i> Paiements</a>
-        <a href="#" class="nav-link"><i class="fas fa-cog"></i> Paramètres</a>
-      </nav>
+    </header>
 
-      <div style="padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05);">
-        <a href="#" class="nav-link" style="color: var(--danger);"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+    <main>
+      <h1>Tableau de Bord</h1>
+
+      <div class="stats-grid">
+        <div class="card">
+          <span class="stat-label">Revenus Mensuels</span>
+          <span class="stat-val">148 240 €</span>
+          <span style="color: var(--success); font-size: 0.8rem;"><i class="fas fa-arrow-up"></i> +12%</span>
+        </div>
+        <div class="card">
+          <span class="stat-label">Nouveaux Clients</span>
+          <span class="stat-val">2 847</span>
+          <span style="color: var(--success); font-size: 0.8rem;"><i class="fas fa-arrow-up"></i> +8%</span>
+        </div>
+        <div class="card">
+          <span class="stat-label">Commandes</span>
+          <span class="stat-val">1 394</span>
+          <span style="color: var(--danger); font-size: 0.8rem;"><i class="fas fa-arrow-down"></i> -2%</span>
+        </div>
       </div>
-    </aside>
 
-    <!-- MAIN CONTENT -->
-    <div class="main-wrapper">
-      <header>
-        <div style="display: flex; align-items: center; gap: 1rem;">
-          <button class="mobile-toggle" id="menuToggle">
-            <i class="fas fa-bars"></i>
-          </button>
-          <div class="search-bar">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Rechercher partout..."/>
+      <div class="content-grid">
+        <div class="card">
+          <h3>Évolution des Ventes</h3>
+          <div class="chart-container">
+            <canvas id="salesChart"></canvas>
           </div>
         </div>
-
-        <div class="top-actions">
-          <button class="icon-btn">
-            <i class="far fa-bell"></i>
-            <span class="badge">3</span>
-          </button>
-          <div class="user-profile">
-            <div class="user-info">
-              <span class="name">Thomas Martin</span>
-              <span class="role">Administrateur</span>
-            </div>
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile">
-          </div>
-        </div>
-      </header>
-
-      <main>
-        <div class="welcome-header">
-          <h1>Tableau de Bord</h1>
-          <p style="color: var(--text-muted); font-size: 0.9rem;">Dernière mise à jour : <span id="currentDate"></span></p>
-        </div>
-
-        <!-- STATS -->
-        <div class="stats-grid">
-          <div class="card stat-card">
-            <div class="stat-header">
-              <div class="stat-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">
-                <i class="fas fa-euro-sign"></i>
-              </div>
-              <span class="stat-trend positive"><i class="fas fa-arrow-up"></i> 12%</span>
-            </div>
-            <span class="stat-value">148 240 €</span>
-            <span class="stat-label">Revenus Mensuels</span>
-          </div>
-
-          <div class="card stat-card">
-            <div class="stat-header">
-              <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">
-                <i class="fas fa-users"></i>
-              </div>
-              <span class="stat-trend positive"><i class="fas fa-arrow-up"></i> 8.4%</span>
-            </div>
-            <span class="stat-value">2 847</span>
-            <span class="stat-label">Nouveaux Clients</span>
-          </div>
-
-          <div class="card stat-card">
-            <div class="stat-header">
-              <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);">
-                <i class="fas fa-shopping-cart"></i>
-              </div>
-              <span class="stat-trend negative"><i class="fas fa-arrow-down"></i> 2.1%</span>
-            </div>
-            <span class="stat-value">1 394</span>
-            <span class="stat-label">Commandes Totales</span>
-          </div>
-
-          <div class="card stat-card">
-            <div class="stat-header">
-              <div class="stat-icon" style="background: rgba(239, 68, 68, 0.1); color: var(--danger);">
-                <i class="fas fa-clock"></i>
-              </div>
-              <span class="stat-trend positive"><i class="fas fa-arrow-up"></i> 0.5%</span>
-            </div>
-            <span class="stat-value">4.8%</span>
-            <span class="stat-label">Taux de Conversion</span>
-          </div>
-        </div>
-
-        <!-- CHARTS -->
-        <div class="content-grid">
-          <div class="card chart-card">
-            <h2>Évolution des Revenus</h2>
-            <div class="chart-wrapper">
-              <canvas id="salesChart"></canvas>
-            </div>
-          </div>
-          <div class="card chart-card">
-            <h2>Répartition par Source</h2>
-            <div class="chart-wrapper">
-              <canvas id="sourceChart"></canvas>
-            </div>
-          </div>
-        </div>
-
-        <!-- TABLE -->
-        <div class="card table-card">
-          <div class="table-header">
-            <h2 style="font-size: 1.1rem;">Transactions Récentes</h2>
-            <button style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem; cursor: pointer; font-weight: 600;">Voir Tout</button>
-          </div>
+        <div class="card">
+          <h3>Dernières Transactions</h3>
           <div class="table-responsive">
             <table>
               <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Client</th>
-                  <th>Date</th>
-                  <th>Montant</th>
-                  <th>Statut</th>
-                </tr>
+                <tr><th>Client</th><th>Montant</th></tr>
               </thead>
               <tbody>
-                <tr>
-                  <td style="color: var(--text-muted);">#TR-8492</td>
-                  <td style="font-weight: 600;">Thomas Martin</td>
-                  <td>02 Mars 2026</td>
-                  <td style="font-weight: 600;">2 450 €</td>
-                  <td><span class="status-pill status-paid">Complété</span></td>
-                </tr>
-                <tr>
-                  <td style="color: var(--text-muted);">#TR-8493</td>
-                  <td style="font-weight: 600;">Sophie Dubois</td>
-                  <td>01 Mars 2026</td>
-                  <td style="font-weight: 600;">980 €</td>
-                  <td><span class="status-pill status-pending">En attente</span></td>
-                </tr>
-                <tr>
-                  <td style="color: var(--text-muted);">#TR-8494</td>
-                  <td style="font-weight: 600;">Lucas Bernard</td>
-                  <td>28 Fév 2026</td>
-                  <td style="font-weight: 600;">3 120 €</td>
-                  <td><span class="status-pill status-paid">Complété</span></td>
-                </tr>
-                <tr>
-                  <td style="color: var(--text-muted);">#TR-8495</td>
-                  <td style="font-weight: 600;">Emma Petit</td>
-                  <td>27 Fév 2026</td>
-                  <td style="font-weight: 600;">450 €</td>
-                  <td><span class="status-pill status-failed">Annulé</span></td>
-                </tr>
+                <tr><td>Thomas Martin</td><td>2 450 €</td></tr>
+                <tr><td>Sophie Dubois</td><td>980 €</td></tr>
+                <tr><td>Lucas Bernard</td><td>3 120 €</td></tr>
               </tbody>
             </table>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   </div>
 
   <script>
-    // MOBILE MENU TOGGLE
-    const menuToggle = document.getElementById('menuToggle');
+    // Toggle Menu
+    const menuBtn = document.getElementById('menuBtn');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
 
@@ -594,33 +238,29 @@
       overlay.classList.toggle('active');
     }
 
-    menuToggle.addEventListener('click', toggleMenu);
+    menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // DATE
-    document.getElementById('currentDate').textContent = new Date().toLocaleDateString('fr-FR', {
-      day: 'numeric', month: 'long', year: 'numeric'
+    // Close menu when clicking a link (mobile)
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 992) toggleMenu();
+      });
     });
 
-    // CHARTS
-    Chart.defaults.color = '#94a3b8';
-    Chart.defaults.font.family = "'Inter', sans-serif";
-
-    // Sales Chart
-    new Chart(document.getElementById('salesChart'), {
+    // Chart
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctx, {
       type: 'line',
       data: {
         labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
         datasets: [{
-          label: 'Revenus (€)',
-          data: [65000, 78000, 72000, 85000, 92000, 105000],
+          label: 'Ventes (€)',
+          data: [12000, 19000, 15000, 25000, 22000, 30000],
           borderColor: '#6366f1',
-          backgroundColor: 'rgba(99, 102, 241, 0.1)',
-          fill: true,
           tension: 0.4,
-          borderWidth: 3,
-          pointRadius: 4,
-          pointBackgroundColor: '#6366f1'
+          fill: true,
+          backgroundColor: 'rgba(99, 102, 241, 0.1)'
         }]
       },
       options: {
@@ -628,30 +268,8 @@
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          y: { grid: { color: 'rgba(255,255,255,0.05)' }, border: { display: false } },
-          x: { grid: { display: false }, border: { display: false } }
-        }
-      }
-    });
-
-    // Source Chart
-    new Chart(document.getElementById('sourceChart'), {
-      type: 'doughnut',
-      data: {
-        labels: ['Direct', 'Social', 'Email', 'Referral'],
-        datasets: [{
-          data: [45, 25, 20, 10],
-          backgroundColor: ['#6366f1', '#10b981', '#f59e0b', '#06b6d4'],
-          borderWidth: 0,
-          hoverOffset: 10
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: '75%',
-        plugins: {
-          legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } }
+          y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+          x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
         }
       }
     });
