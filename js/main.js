@@ -7,9 +7,13 @@ const body = document.body;
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
 
-function applyTheme(theme) {
+function applyTheme(theme, persist = false) {
   document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
+  if (persist) {
+    try {
+      localStorage.setItem('theme', theme);
+    } catch (e) { /* storage indisponible */ }
+  }
   if (theme === 'dark') {
     themeIcon.className = 'fas fa-moon';
     themeToggle.setAttribute('aria-label', 'Passer en mode clair');
@@ -19,17 +23,20 @@ function applyTheme(theme) {
   }
 }
 
-// Sync icon with current theme on page load
+// Sync icon at page load — no persistence
 applyTheme(document.documentElement.getAttribute('data-theme') || 'dark');
 
+// User click — persist
 themeToggle.addEventListener('click', () => {
   const current = document.documentElement.getAttribute('data-theme');
-  applyTheme(current === 'dark' ? 'light' : 'dark');
+  applyTheme(current === 'dark' ? 'light' : 'dark', true);
 });
 
-// Listen to OS theme change (if no saved preference)
+// OS change — no persistence
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-  if (!localStorage.getItem('theme')) {
+  let saved = null;
+  try { saved = localStorage.getItem('theme'); } catch (e) { saved = null; }
+  if (!saved) {
     applyTheme(e.matches ? 'dark' : 'light');
   }
 });
