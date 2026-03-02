@@ -162,6 +162,12 @@ td { padding: 1.1rem 1rem; border-bottom: 1px solid rgba(51, 65, 85, 0.5); font-
 .status { padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
 .status-paid { background: rgba(16, 185, 129, 0.15); color: var(--success); }
 .status-pending { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+.status-cancelled { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+.status-inactive { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+/* SECTION VISIBILITY */
+.section-content { display: none; }
+.section-content.active { display: block; }
 
 /* RESPONSIVE */
 @media (max-width: 992px) {

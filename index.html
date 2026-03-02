@@ -29,12 +29,12 @@
       <span>Nexus<span style="color:var(--primary)">Dash</span></span>
     </div>
     <nav class="nav-menu">
-      <a href="#" class="nav-link active"><i class="fas fa-th-large"></i> Dashboard</a>
-      <a href="#" class="nav-link"><i class="fas fa-chart-line"></i> Analytics</a>
-      <a href="#" class="nav-link"><i class="fas fa-users"></i> Clients</a>
-      <a href="#" class="nav-link"><i class="fas fa-shopping-bag"></i> Commandes</a>
-      <a href="#" class="nav-link"><i class="fas fa-wallet"></i> Finances</a>
-      <a href="#" class="nav-link"><i class="fas fa-cog"></i> Paramètres</a>
+      <a href="#" class="nav-link active" data-section="dashboard"><i class="fas fa-th-large"></i> Dashboard</a>
+      <a href="#" class="nav-link" data-section="analytics"><i class="fas fa-chart-line"></i> Analytics</a>
+      <a href="#" class="nav-link" data-section="clients"><i class="fas fa-users"></i> Clients</a>
+      <a href="#" class="nav-link" data-section="commandes"><i class="fas fa-shopping-bag"></i> Commandes</a>
+      <a href="#" class="nav-link" data-section="finances"><i class="fas fa-wallet"></i> Finances</a>
+      <a href="#" class="nav-link" data-section="parametres"><i class="fas fa-cog"></i> Paramètres</a>
     </nav>
     <div style="padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05);">
       <a href="#" class="nav-link" style="color: var(--danger);"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
@@ -68,92 +68,295 @@
         <p>Aperçu de vos performances pour aujourd'hui, <span id="currentDate"></span></p>
       </div>
 
-      <!-- STATS -->
-      <div class="stats-grid">
-        <div class="card">
-          <div class="stat-header">
-            <div class="stat-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">
-              <i class="fas fa-euro-sign"></i>
+      <!-- SECTION: DASHBOARD -->
+      <div id="section-dashboard" class="section-content active">
+        <div class="stats-grid">
+          <div class="card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">
+                <i class="fas fa-euro-sign"></i>
+              </div>
+              <span class="trend trend-up"><i class="fas fa-arrow-up"></i> 14.2%</span>
             </div>
-            <span class="trend trend-up"><i class="fas fa-arrow-up"></i> 14.2%</span>
+            <span class="stat-val">148 240 €</span>
+            <span class="stat-label">Revenus ce mois</span>
           </div>
-          <span class="stat-val">148 240 €</span>
-          <span class="stat-label">Revenus ce mois</span>
+
+          <div class="card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">
+                <i class="fas fa-users"></i>
+              </div>
+              <span class="trend trend-up"><i class="fas fa-arrow-up"></i> 8.1%</span>
+            </div>
+            <span class="stat-val">2 847</span>
+            <span class="stat-label">Nouveaux Clients</span>
+          </div>
+
+          <div class="card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+              <span class="trend trend-down"><i class="fas fa-arrow-down"></i> 3.2%</span>
+            </div>
+            <span class="stat-val">1 394</span>
+            <span class="stat-label">Commandes</span>
+          </div>
+
+          <div class="card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: rgba(239, 68, 68, 0.1); color: var(--danger);">
+                <i class="fas fa-percentage"></i>
+              </div>
+              <span class="trend trend-up"><i class="fas fa-arrow-up"></i> 0.4%</span>
+            </div>
+            <span class="stat-val">4.8%</span>
+            <span class="stat-label">Taux de Conversion</span>
+          </div>
         </div>
 
-        <div class="card">
-          <div class="stat-header">
-            <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">
-              <i class="fas fa-users"></i>
+        <div class="content-grid">
+          <div class="card">
+            <h3 style="font-size: 1.1rem;">Évolution des Revenus</h3>
+            <div class="chart-container">
+              <canvas id="mainChart"></canvas>
             </div>
-            <span class="trend trend-up"><i class="fas fa-arrow-up"></i> 8.1%</span>
           </div>
-          <span class="stat-val">2 847</span>
-          <span class="stat-label">Nouveaux Clients</span>
-        </div>
-
-        <div class="card">
-          <div class="stat-header">
-            <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);">
-              <i class="fas fa-shopping-cart"></i>
+          <div class="card">
+            <h3 style="font-size: 1.1rem;">Dernières Transactions</h3>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr><th>Client</th><th>Montant</th><th>Statut</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="font-weight: 600;">Thomas Martin</td>
+                    <td>2 450 €</td>
+                    <td><span class="status status-paid">Payé</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 600;">Sophie Dubois</td>
+                    <td>980 €</td>
+                    <td><span class="status status-pending">Attente</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 600;">Lucas Bernard</td>
+                    <td>3 120 €</td>
+                    <td><span class="status status-paid">Payé</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 600;">Emma Petit</td>
+                    <td>450 €</td>
+                    <td><span class="status status-pending">Attente</span></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <span class="trend trend-down"><i class="fas fa-arrow-down"></i> 3.2%</span>
           </div>
-          <span class="stat-val">1 394</span>
-          <span class="stat-label">Commandes</span>
-        </div>
-
-        <div class="card">
-          <div class="stat-header">
-            <div class="stat-icon" style="background: rgba(239, 68, 68, 0.1); color: var(--danger);">
-              <i class="fas fa-percentage"></i>
-            </div>
-            <span class="trend trend-up"><i class="fas fa-arrow-up"></i> 0.4%</span>
-          </div>
-          <span class="stat-val">4.8%</span>
-          <span class="stat-label">Taux de Conversion</span>
         </div>
       </div>
 
-      <!-- CHARTS -->
-      <div class="content-grid">
-        <div class="card">
-          <h3 style="font-size: 1.1rem;">Évolution des Revenus</h3>
-          <div class="chart-container">
-            <canvas id="mainChart"></canvas>
+      <!-- SECTION: ANALYTICS -->
+      <div id="section-analytics" class="section-content">
+        <div class="stats-grid">
+          <div class="card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">
+                <i class="fas fa-users"></i>
+              </div>
+              <span class="trend trend-up"><i class="fas fa-arrow-up"></i> 12.3%</span>
+            </div>
+            <span class="stat-val">18 492</span>
+            <span class="stat-label">Visiteurs uniques</span>
+          </div>
+
+          <div class="card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">
+                <i class="fas fa-percentage"></i>
+              </div>
+              <span class="trend trend-down"><i class="fas fa-arrow-down"></i> 2.1%</span>
+            </div>
+            <span class="stat-val">34.2%</span>
+            <span class="stat-label">Taux de rebond</span>
+          </div>
+
+          <div class="card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);">
+                <i class="fas fa-clock"></i>
+              </div>
+              <span class="trend trend-up"><i class="fas fa-arrow-up"></i> 0.8%</span>
+            </div>
+            <span class="stat-val">4m 32s</span>
+            <span class="stat-label">Durée moyenne de session</span>
           </div>
         </div>
+
         <div class="card">
-          <h3 style="font-size: 1.1rem;">Dernières Transactions</h3>
+          <h3 style="font-size: 1.1rem;">Trafic par jour</h3>
+          <div class="chart-container">
+            <canvas id="analyticsChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: CLIENTS -->
+      <div id="section-clients" class="section-content">
+        <div class="card">
+          <h3 style="font-size: 1.1rem;">Liste des Clients</h3>
           <div class="table-responsive">
             <table>
               <thead>
-                <tr><th>Client</th><th>Montant</th><th>Statut</th></tr>
+                <tr><th>Nom</th><th>Email</th><th>Date d'inscription</th><th>Statut</th></tr>
               </thead>
               <tbody>
                 <tr>
                   <td style="font-weight: 600;">Thomas Martin</td>
-                  <td>2 450 €</td>
-                  <td><span class="status status-paid">Payé</span></td>
+                  <td>thomas@example.com</td>
+                  <td>12 Jan 2026</td>
+                  <td><span class="status status-paid">Actif</span></td>
                 </tr>
                 <tr>
                   <td style="font-weight: 600;">Sophie Dubois</td>
-                  <td>980 €</td>
-                  <td><span class="status status-pending">Attente</span></td>
+                  <td>sophie@example.com</td>
+                  <td>28 Jan 2026</td>
+                  <td><span class="status status-paid">Actif</span></td>
                 </tr>
                 <tr>
                   <td style="font-weight: 600;">Lucas Bernard</td>
-                  <td>3 120 €</td>
-                  <td><span class="status status-paid">Payé</span></td>
+                  <td>lucas@example.com</td>
+                  <td>03 Fév 2026</td>
+                  <td><span class="status status-inactive">Inactif</span></td>
                 </tr>
                 <tr>
                   <td style="font-weight: 600;">Emma Petit</td>
-                  <td>450 €</td>
-                  <td><span class="status status-pending">Attente</span></td>
+                  <td>emma@example.com</td>
+                  <td>15 Fév 2026</td>
+                  <td><span class="status status-paid">Actif</span></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 600;">Marc Leroy</td>
+                  <td>marc@example.com</td>
+                  <td>22 Fév 2026</td>
+                  <td><span class="status status-paid">Actif</span></td>
                 </tr>
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
+
+      <!-- SECTION: COMMANDES -->
+      <div id="section-commandes" class="section-content">
+        <div class="card">
+          <h3 style="font-size: 1.1rem;">Liste des Commandes</h3>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr><th>ID</th><th>Client</th><th>Produit</th><th>Montant</th><th>Statut</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>#1042</td>
+                  <td>Thomas Martin</td>
+                  <td>Abonnement Pro</td>
+                  <td>99 €</td>
+                  <td><span class="status status-paid">Payé</span></td>
+                </tr>
+                <tr>
+                  <td>#1041</td>
+                  <td>Sophie Dubois</td>
+                  <td>Formation CSS</td>
+                  <td>199 €</td>
+                  <td><span class="status status-pending">Attente</span></td>
+                </tr>
+                <tr>
+                  <td>#1040</td>
+                  <td>Lucas Bernard</td>
+                  <td>Licence Annuelle</td>
+                  <td>299 €</td>
+                  <td><span class="status status-paid">Payé</span></td>
+                </tr>
+                <tr>
+                  <td>#1039</td>
+                  <td>Emma Petit</td>
+                  <td>Support Premium</td>
+                  <td>49 €</td>
+                  <td><span class="status status-paid">Payé</span></td>
+                </tr>
+                <tr>
+                  <td>#1038</td>
+                  <td>Marc Leroy</td>
+                  <td>Pack Starter</td>
+                  <td>149 €</td>
+                  <td><span class="status status-cancelled">Annulé</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: FINANCES -->
+      <div id="section-finances" class="section-content">
+        <div class="stats-grid">
+          <div class="card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">
+                <i class="fas fa-chart-line"></i>
+              </div>
+            </div>
+            <span class="stat-val">148 240 €</span>
+            <span class="stat-label">Revenus totaux</span>
+          </div>
+
+          <div class="card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: rgba(239, 68, 68, 0.1); color: var(--danger);">
+                <i class="fas fa-receipt"></i>
+              </div>
+            </div>
+            <span class="stat-val">52 180 €</span>
+            <span class="stat-label">Dépenses totales</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size: 1.1rem;">Répartition des Revenus</h3>
+          <div class="chart-container">
+            <canvas id="financesChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: PARAMÈTRES -->
+      <div id="section-parametres" class="section-content">
+        <div class="card">
+          <h3 style="font-size: 1.1rem;">Paramètres du compte</h3>
+          <form style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; max-width: 500px;">
+            <div>
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Nom d'affichage</label>
+              <input type="text" value="Thomas Martin" style="width: 100%; padding: 0.75rem 1rem; background: var(--bg-dark); border: 1px solid #334155; border-radius: 10px; color: var(--text); font-family: inherit; font-size: 0.95rem;">
+            </div>
+            <div>
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Email</label>
+              <input type="email" value="thomas@example.com" style="width: 100%; padding: 0.75rem 1rem; background: var(--bg-dark); border: 1px solid #334155; border-radius: 10px; color: var(--text); font-family: inherit; font-size: 0.95rem;">
+            </div>
+            <div>
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Langue</label>
+              <select style="width: 100%; padding: 0.75rem 1rem; background: var(--bg-dark); border: 1px solid #334155; border-radius: 10px; color: var(--text); font-family: inherit; font-size: 0.95rem;">
+                <option value="fr">Français</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+              </select>
+            </div>
+            <div>
+              <button type="submit" style="padding: 0.75rem 2rem; background: var(--primary); color: white; border: none; border-radius: 10px; font-family: inherit; font-size: 0.95rem; font-weight: 600; cursor: pointer;">Sauvegarder</button>
+            </div>
+          </form>
         </div>
       </div>
     </main>
