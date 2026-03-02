@@ -70,8 +70,15 @@ const chartsInitialized = { dashboard: true };
 
 // Initialize a section's chart on first display
 function initSectionChart(section) {
+  if (typeof Chart === 'undefined') {
+    console.warn('Chart.js not available; skipping chart initialization for section:', section);
+    return;
+  }
+
   if (section === 'analytics') {
-    const ctx = document.getElementById('analyticsChart').getContext('2d');
+    const canvas = document.getElementById('analyticsChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
     new Chart(ctx, {
       type: 'bar',
       data: {
@@ -102,7 +109,9 @@ function initSectionChart(section) {
       }
     });
   } else if (section === 'finances') {
-    const ctx = document.getElementById('financesChart').getContext('2d');
+    const canvas = document.getElementById('financesChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
     new Chart(ctx, {
       type: 'doughnut',
       data: {
@@ -164,36 +173,41 @@ navLinks.forEach(link => {
 });
 
 // Chart.js Configuration — Dashboard main chart
-const ctx = document.getElementById('mainChart').getContext('2d');
-new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil'],
-    datasets: [{
-      label: 'Revenus (€)',
-      data: [45000, 52000, 48000, 61000, 58000, 72000, 85000],
-      borderColor: '#6366f1',
-      backgroundColor: 'rgba(99, 102, 241, 0.1)',
-      borderWidth: 3,
-      fill: true,
-      tension: 0.4,
-      pointRadius: 5,
-      pointBackgroundColor: '#6366f1'
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: {
-      y: {
-        grid: { color: 'rgba(255,255,255,0.05)' },
-        ticks: { color: '#94a3b8', font: { size: 11 } }
+if (typeof Chart !== 'undefined') {
+  const mainCanvas = document.getElementById('mainChart');
+  if (mainCanvas) {
+    const ctx = mainCanvas.getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil'],
+        datasets: [{
+          label: 'Revenus (€)',
+          data: [45000, 52000, 48000, 61000, 58000, 72000, 85000],
+          borderColor: '#6366f1',
+          backgroundColor: 'rgba(99, 102, 241, 0.1)',
+          borderWidth: 3,
+          fill: true,
+          tension: 0.4,
+          pointRadius: 5,
+          pointBackgroundColor: '#6366f1'
+        }]
       },
-      x: {
-        grid: { display: false },
-        ticks: { color: '#94a3b8', font: { size: 11 } }
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: {
+            grid: { color: 'rgba(255,255,255,0.05)' },
+            ticks: { color: '#94a3b8', font: { size: 11 } }
+          },
+          x: {
+            grid: { display: false },
+            ticks: { color: '#94a3b8', font: { size: 11 } }
+          }
+        }
       }
-    }
+    });
   }
-});
+}
