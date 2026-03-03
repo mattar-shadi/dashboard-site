@@ -77,8 +77,8 @@ if (currentDateEl) {
 
 // Chart.js — Dashboard main chart
 const mainChartCanvas = document.getElementById('mainChart');
-if (mainChartCanvas) {
-  new Chart(mainChartCanvas.getContext('2d'), {
+if (mainChartCanvas && window.Chart) {
+  new window.Chart(mainChartCanvas.getContext('2d'), {
     type: 'line',
     data: {
       labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil'],
