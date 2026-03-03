@@ -21,7 +21,7 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard — NexusDash</title>
+  <title>Analytics — NexusDash</title>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,8 +47,8 @@
       <span>Nexus<span style="color:var(--primary)">Dash</span></span>
     </div>
     <nav class="nav-menu" aria-label="Menu principal">
-      <a href="index.html" class="nav-link active" data-section="dashboard" aria-current="page"><i class="fas fa-th-large"></i> Dashboard</a>
-      <a href="analytics.html" class="nav-link" data-section="analytics"><i class="fas fa-chart-line"></i> Analytics</a>
+      <a href="index.html" class="nav-link" data-section="dashboard"><i class="fas fa-th-large"></i> Dashboard</a>
+      <a href="analytics.html" class="nav-link active" data-section="analytics" aria-current="page"><i class="fas fa-chart-line"></i> Analytics</a>
       <a href="clients.html" class="nav-link" data-section="clients"><i class="fas fa-users"></i> Clients</a>
       <a href="commandes.html" class="nav-link" data-section="commandes"><i class="fas fa-shopping-bag"></i> Commandes</a>
       <a href="finances.html" class="nav-link" data-section="finances"><i class="fas fa-wallet"></i> Finances</a>
@@ -86,95 +86,49 @@
 
     <main>
       <div class="page-title">
-        <h1>Bienvenue sur Nexus Dashboard</h1>
-        <p>Aperçu de vos performances pour aujourd'hui, <span id="currentDate"></span></p>
+        <h1>Analytics</h1>
+        <p>Vue d'ensemble de votre trafic et engagement</p>
       </div>
 
       <div class="stats-grid">
         <div class="card">
           <div class="stat-header">
             <div class="stat-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">
-              <i class="fas fa-euro-sign"></i>
+              <i class="fas fa-users"></i>
             </div>
-            <span class="trend trend-up"><i class="fas fa-arrow-up"></i> 14.2%</span>
+            <span class="trend trend-up"><i class="fas fa-arrow-up"></i> 12.3%</span>
           </div>
-          <span class="stat-val">148 240 €</span>
-          <span class="stat-label">Revenus ce mois</span>
+          <span class="stat-val">18 492</span>
+          <span class="stat-label">Visiteurs uniques</span>
         </div>
 
         <div class="card">
           <div class="stat-header">
             <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">
-              <i class="fas fa-users"></i>
+              <i class="fas fa-percentage"></i>
             </div>
-            <span class="trend trend-up"><i class="fas fa-arrow-up"></i> 8.1%</span>
+            <span class="trend trend-down"><i class="fas fa-arrow-down"></i> 2.1%</span>
           </div>
-          <span class="stat-val">2 847</span>
-          <span class="stat-label">Nouveaux Clients</span>
+          <span class="stat-val">34.2%</span>
+          <span class="stat-label">Taux de rebond</span>
         </div>
 
         <div class="card">
           <div class="stat-header">
             <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);">
-              <i class="fas fa-shopping-cart"></i>
+              <i class="fas fa-clock"></i>
             </div>
-            <span class="trend trend-down"><i class="fas fa-arrow-down"></i> 3.2%</span>
+            <span class="trend trend-up"><i class="fas fa-arrow-up"></i> 0.8%</span>
           </div>
-          <span class="stat-val">1 394</span>
-          <span class="stat-label">Commandes</span>
-        </div>
-
-        <div class="card">
-          <div class="stat-header">
-            <div class="stat-icon" style="background: rgba(239, 68, 68, 0.1); color: var(--danger);">
-              <i class="fas fa-percentage"></i>
-            </div>
-            <span class="trend trend-up"><i class="fas fa-arrow-up"></i> 0.4%</span>
-          </div>
-          <span class="stat-val">4.8%</span>
-          <span class="stat-label">Taux de Conversion</span>
+          <span class="stat-val">4m 32s</span>
+          <span class="stat-label">Durée moyenne de session</span>
         </div>
       </div>
 
-      <div class="content-grid">
-        <div class="card">
-          <h3 style="font-size: 1.1rem;">Évolution des Revenus</h3>
-          <div class="chart-container">
-            <canvas id="mainChart"></canvas>
-          </div>
-        </div>
-        <div class="card">
-          <h3 style="font-size: 1.1rem;">Dernières Transactions</h3>
-          <div class="table-responsive">
-            <table>
-              <caption class="sr-only">Dernières Transactions</caption>
-              <thead>
-                <tr><th>Client</th><th>Montant</th><th>Statut</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="font-weight: 600;">Thomas Martin</td>
-                  <td>2 450 €</td>
-                  <td><span class="status status-paid">Payé</span></td>
-                </tr>
-                <tr>
-                  <td style="font-weight: 600;">Sophie Dubois</td>
-                  <td>980 €</td>
-                  <td><span class="status status-pending">Attente</span></td>
-                </tr>
-                <tr>
-                  <td style="font-weight: 600;">Lucas Bernard</td>
-                  <td>3 120 €</td>
-                  <td><span class="status status-paid">Payé</span></td>
-                </tr>
-                <tr>
-                  <td style="font-weight: 600;">Emma Petit</td>
-                  <td>450 €</td>
-                  <td><span class="status status-pending">Attente</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+      <div class="card">
+        <h3 style="font-size: 1.1rem;">Trafic par jour</h3>
+        <div class="chart-container">
+          <canvas id="analyticsChart"></canvas>
         </div>
       </div>
     </main>

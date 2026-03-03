@@ -19,7 +19,23 @@ Un dashboard moderne et responsive conçu avec HTML, CSS et JavaScript. Parfait 
 - **Accessibilité** : Sémantique HTML correcte et contraste optimal
 - **Performance** : Chargement rapide et optimisé
 - **Dark/Light mode** : Bascule entre mode sombre et clair avec détection automatique des préférences système
-- **Navigation dynamique** : 6 sections distinctes (Dashboard, Analytics, Clients, Commandes, Finances, Paramètres)
+- **Navigation dynamique** : 6 pages dédiées (Dashboard, Analytics, Clients, Commandes, Finances, Paramètres)
+
+## 📂 Structure
+
+```
+dashboard-site/
+├── index.html           → Page Dashboard principale
+├── analytics.html       → Section Analytics
+├── clients.html         → Section Clients
+├── commandes.html       → Section Commandes
+├── finances.html        → Section Finances
+├── parametres.html      → Section Paramètres
+├── css/
+│   └── style.css        → Styles communs
+└── js/
+    └── main.js          → JS commun (sidebar, thème, graphiques)
+```
 
 ## 📊 Contenu
 
