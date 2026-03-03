@@ -110,6 +110,11 @@ header {
 }
 .hamburger-btn:hover { background: #334155; border-color: var(--primary); }
 
+#themeToggle {
+  border: 1px solid #334155;
+  color: var(--text, white);
+}
+
 .user-profile { display: flex; align-items: center; gap: 0.8rem; cursor: pointer; }
 .user-profile img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); }
 .user-info { display: block; }
@@ -283,4 +288,13 @@ td { padding: 1.1rem 1rem; border-bottom: 1px solid rgba(51, 65, 85, 0.5); font-
   background: #f8fafc !important;
   border-color: #e2e8f0 !important;
   color: #1e293b !important;
+}
+
+[data-theme="light"] .logo {
+  color: var(--text);
+  border-color: #e2e8f0;
+}
+
+[data-theme="light"] .logo span {
+  color: var(--text);
 }
