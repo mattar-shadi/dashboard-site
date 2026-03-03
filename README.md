@@ -2,6 +2,14 @@
 
 Un dashboard moderne et responsive conçu avec HTML, CSS et JavaScript. Parfait pour la gestion de données, l'analyse de ventes et le suivi des performances en temps réel.
 
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-GitHub_Pages-6366f1?style=for-the-badge)](https://mattar-shadi.github.io/dashboard-site/)
+
+> 🔗 **Démo en ligne** : [https://mattar-shadi.github.io/dashboard-site/](https://mattar-shadi.github.io/dashboard-site/)
+
+## 📸 Aperçu
+
+![NexusDash Dashboard](https://github.com/user-attachments/assets/619184a0-1fbc-4727-9471-fdaaf2c9c075)
+
 ## 🎯 Caractéristiques
 
 - **Design moderne et élégant** : Interface sombre avec palette de couleurs professionnelle
@@ -10,6 +18,8 @@ Un dashboard moderne et responsive conçu avec HTML, CSS et JavaScript. Parfait 
 - **Animations fluides** : Transitions et animations CSS pour une meilleure UX
 - **Accessibilité** : Sémantique HTML correcte et contraste optimal
 - **Performance** : Chargement rapide et optimisé
+- **Dark/Light mode** : Bascule entre mode sombre et clair avec détection automatique des préférences système
+- **Navigation dynamique** : 6 sections distinctes (Dashboard, Analytics, Clients, Commandes, Finances, Paramètres)
 
 ## 📊 Contenu
 
@@ -43,7 +53,7 @@ Un dashboard moderne et responsive conçu avec HTML, CSS et JavaScript. Parfait 
 
 1. Clonez le repository :
 ```bash
-git clone https://github.com/votre-username/dashboard-site.git
+git clone https://github.com/mattar-shadi/dashboard-site.git
 cd dashboard-site
 ```
 
@@ -104,6 +114,7 @@ Les données sont hardcodées dans le fichier HTML. Pour les modifier :
 
 ## 🔗 Liens utiles
 
+- [🌐 Démo en ligne](https://mattar-shadi.github.io/dashboard-site/) - Voir le dashboard en action
 - [Documentation Chart.js](https://www.chartjs.org/docs/latest/)
 - [Font Awesome Icons](https://fontawesome.com/icons)
 - [CSS Grid Guide](https://css-tricks.com/snippets/css/complete-guide-grid/)
