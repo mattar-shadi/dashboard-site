@@ -200,7 +200,6 @@ td { padding: 1.1rem 1rem; border-bottom: 1px solid rgba(51, 65, 85, 0.5); font-
   .stat-val { font-size: 1.4rem; }
   .page-title h1 { font-size: 1.3rem; }
   header { padding: 0 0.75rem; }
-  .col-hide-mobile { display: none; }
 }
 
 /* OVERLAY */
