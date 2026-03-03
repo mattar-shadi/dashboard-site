@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <script>
+    (function() {
+      let saved = null;
+      try {
+        saved = localStorage.getItem('theme');
+      } catch (e) {
+        saved = null;
+      }
+      const allowedThemes = ['dark', 'light'];
+      const isValidSaved = typeof saved === 'string' && allowedThemes.indexOf(saved) !== -1;
+      if (isValidSaved) {
+        document.documentElement.setAttribute('data-theme', saved);
+      } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      }
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Paramètres — NexusDash</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="">
+
+  <div class="overlay" id="overlay"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">
+      <i class="fas fa-bolt"></i>
+      <span>Nexus<span style="color:var(--primary)">Dash</span></span>
+    </div>
+    <nav class="nav-menu" aria-label="Menu principal">
+      <a href="index.html" class="nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
+      <a href="analytics.html" class="nav-link"><i class="fas fa-chart-line"></i> Analytics</a>
+      <a href="clients.html" class="nav-link"><i class="fas fa-users"></i> Clients</a>
+      <a href="commandes.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Commandes</a>
+      <a href="finances.html" class="nav-link"><i class="fas fa-wallet"></i> Finances</a>
+      <a href="parametres.html" class="nav-link active" aria-current="page"><i class="fas fa-cog"></i> Paramètres</a>
+    </nav>
+    <div style="padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05);">
+      <a href="#" class="nav-link" style="color: var(--danger);"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main-wrapper">
+    <header>
+      <div class="header-left">
+        <button class="hamburger-btn" id="hamburgerBtn" title="Basculer le menu" aria-label="Basculer le menu" aria-expanded="false" aria-controls="sidebar">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="search-box" style="display: none;"> <!-- Hidden for now -->
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+      
+      <button id="themeToggle" aria-label="Basculer le thème" style="background: var(--bg-card); width: 42px; height: 42px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: var(--transition);">
+        <i class="fas fa-moon" id="themeIcon"></i>
+      </button>
+
+      <div class="user-profile">
+        <div class="user-info">
+          <span class="name">Thomas Martin</span>
+          <span class="role">Admin Principal</span>
+        </div>
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Photo de profil de Thomas Martin">
+      </div>
+    </header>
+
+    <main>
+      <div class="page-title">
+        <h1>Paramètres</h1>
+        <p>Configuration de votre compte et préférences</p>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size: 1.1rem;">Paramètres du compte</h3>
+        <form style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; max-width: 500px;">
+          <div>
+            <label for="display-name" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Nom d'affichage</label>
+            <input id="display-name" name="display-name" type="text" value="Thomas Martin" autocomplete="name" aria-required="true" required style="width: 100%; padding: 0.75rem 1rem; background: var(--bg-dark); border: 1px solid #334155; border-radius: 10px; color: var(--text); font-family: inherit; font-size: 0.95rem;">
+          </div>
+          <div>
+            <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Email</label>
+            <input id="email" name="email" type="email" value="thomas@example.com" autocomplete="email" aria-required="true" required style="width: 100%; padding: 0.75rem 1rem; background: var(--bg-dark); border: 1px solid #334155; border-radius: 10px; color: var(--text); font-family: inherit; font-size: 0.95rem;">
+          </div>
+          <div>
+            <label for="language" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Langue</label>
+            <select id="language" name="language" required style="width: 100%; padding: 0.75rem 1rem; background: var(--bg-dark); border: 1px solid #334155; border-radius: 10px; color: var(--text); font-family: inherit; font-size: 0.95rem;">
+              <option value="fr">Français</option>
+              <option value="en">English</option>
+              <option value="es">Español</option>
+            </select>
+          </div>
+          <div>
+            <button type="submit" style="padding: 0.75rem 2rem; background: var(--primary); color: white; border: none; border-radius: 10px; font-family: inherit; font-size: 0.95rem; font-weight: 600; cursor: pointer;">Sauvegarder</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
