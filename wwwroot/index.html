@@ -54,6 +54,18 @@
         <button type="button" class="dismiss" aria-label="Fermer le message d’erreur">🗙</button>
     </div>
     <script src="js/main.js"></script>
+    <script>
+      (function(l) {
+        if (l.search.length > 2 && l.search[1] === 'p' && l.search[2] === '=') {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&');
+          }).join('?');
+          window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location));
+    </script>
     <script src="_framework/blazor.webassembly.js"></script>
 </body>
 
