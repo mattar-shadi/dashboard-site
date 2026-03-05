@@ -1,156 +1,104 @@
-# Dashboard Moderne 2026 — Blazor WebAssembly
+# DashboardSite — Blazor WebAssembly (WASM)
 
-Un dashboard moderne et responsive construit avec **Blazor WebAssembly (.NET 8)**. Interface sombre/claire avec Chart.js, Font Awesome et navigation SPA entièrement côté client.
+Dashboard UI moderne (template) construit en **Blazor WebAssembly (.NET 8)** et déployé sur **GitHub Pages**.
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-GitHub_Pages-6366f1?style=for-the-badge)](https://mattar-shadi.github.io/dashboard-site/)
+- Démo : https://mattar-shadi.github.io/dashboard-site/
 
-> 🔗 **Démo en ligne** : [https://mattar-shadi.github.io/dashboard-site/](https://mattar-shadi.github.io/dashboard-site/)
+> Objectif du projet (à venir) : en faire un dashboard pour suivre les ventes Microsoft Store (intégration Partner Center dans une étape suivante).
 
-## 📸 Aperçu
+## ✨ Fonctionnalités actuelles
 
-![NexusDash Dashboard](https://github.com/user-attachments/assets/619184a0-1fbc-4727-9471-fdaaf2c9c075)
+- SPA **Blazor WASM** (.NET 8)
+- Thème **dark / light** (persistance via `localStorage`)
+- Sidebar responsive (hamburger + overlay mobile)
+- Pages Razor : Dashboard, Analytics, Clients, Commandes, Finances, Paramètres
+- Graphiques via **Chart.js** (CDN) + JavaScript (pour l’instant)
+- Déploiement automatisé sur GitHub Pages
 
-## 🎯 Caractéristiques
-
-- **Blazor WebAssembly** : Application SPA entièrement côté client (.NET 8)
-- **Design moderne et élégant** : Interface sombre avec palette de couleurs professionnelle
-- **Responsive** : Adapté à tous les appareils (desktop, tablette, mobile)
-- **Graphiques interactifs** : Chart.js via CDN avec interop JavaScript
-- **Animations fluides** : Transitions et animations CSS pour une meilleure UX
-- **Accessibilité** : Sémantique HTML correcte et contraste optimal
-- **Dark/Light mode** : Bascule entre mode sombre et clair avec détection automatique des préférences système
-- **Navigation SPA** : 6 pages Razor (Dashboard, Analytics, Clients, Commandes, Finances, Paramètres)
-
-## 📂 Structure
+## 🧱 Structure du repo
 
 ```
-dashboard-site/
-├── DashboardSite.csproj    → Projet Blazor WebAssembly (.NET 8)
-├── Program.cs              → Point d'entrée Blazor
-├── App.razor               → Router Blazor
-├── _Imports.razor          → Namespaces globaux
+.
+├── DashboardSite.csproj
+├── Program.cs
+├── App.razor
+├── _Imports.razor
 ├── Layout/
-│   └── MainLayout.razor    → Layout partagé (sidebar + header)
 ├── Pages/
-│   ├── Index.razor         → Page Dashboard (/)
-│   ├── Analytics.razor     → Page Analytics (/analytics)
-│   ├── Clients.razor       → Page Clients (/clients)
-│   ├── Commandes.razor     → Page Commandes (/commandes)
-│   ├── Finances.razor      → Page Finances (/finances)
-│   └── Parametres.razor    → Page Paramètres (/parametres)
 ├── wwwroot/
-│   ├── index.html          → Shell HTML Blazor WASM
+│   ├── index.html
 │   ├── css/
-│   │   └── style.css       → Styles communs
+│   │   └── style.css
 │   └── js/
-│       └── main.js         → JS interop (sidebar, thème, graphiques)
-└── .github/
-    └── workflows/
-        └── deploy.yml      → Build + déploiement GitHub Pages
+│       └── main.js
+└── .github/workflows/deploy.yml
 ```
 
-## 🚀 Pré-requis
+## ✅ Pré-requis
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) ou supérieur
+- .NET SDK 8.x
 
-## ⚡ Démarrage rapide
+Vérifier :
 
-1. Clonez le repository :
+```bash
+dotnet --version
+```
+
+## ▶️ Lancer en local (dev)
+
 ```bash
 git clone https://github.com/mattar-shadi/dashboard-site.git
 cd dashboard-site
-```
 
-2. Restaurez les dépendances :
-```bash
 dotnet restore
-```
-
-3. Lancez l'application en développement :
-```bash
 dotnet run
-# Puis accédez à http://localhost:5062
 ```
 
-## 🏗️ Build & Publication
+Ensuite ouvrir l’URL indiquée dans la console (ex: `http://localhost:5062`).
+
+## 🏗️ Build / Publish
 
 ```bash
 # Build
 dotnet build
 
-# Publier en mode Release
+# Publish (Release)
 dotnet publish -c Release -o publish
-# Les fichiers statiques se trouvent dans publish/wwwroot/
 ```
+
+Les fichiers statiques publiés se trouvent dans :
+
+- `publish/wwwroot/`
 
 ## 🌐 Déploiement GitHub Pages
 
-Le workflow `.github/workflows/deploy.yml` se déclenche automatiquement à chaque push sur `main` :
+Le workflow `.github/workflows/deploy.yml` :
 
-1. Installe le SDK .NET 8
-2. Exécute `dotnet publish -c Release`
-3. Corrige le `<base href>` pour le sous-chemin `/dashboard-site/`
-4. Génère `404.html` (copie de `index.html`) pour le routing SPA
-5. Ajoute `.nojekyll` pour désactiver Jekyll
-6. Déploie sur GitHub Pages via `actions/deploy-pages`
+- build + publish en Release
+- ajuste le `<base href>` vers `/dashboard-site/` (car le site est servi sous un sous-chemin)
+- génère `404.html` (copie de `index.html`) pour supporter le routing SPA sur GitHub Pages
+- ajoute `.nojekyll`
+- déploie via `actions/deploy-pages`
 
-Le site est servi sous : `https://mattar-shadi.github.io/dashboard-site/`
+### Branche de déclenchement
 
-## 🎨 Personnalisation
+Attention : le workflow se déclenche sur la branche **`main`**.
 
-### Modifier les couleurs
+Si ta branche par défaut est `master`, tu as 2 options :
+1. Renommer la branche par défaut en `main`
+2. Ou modifier le workflow pour déclencher sur `master`
 
-Éditez les variables CSS dans `wwwroot/css/style.css` :
+## 🎨 Assets / UI
 
-```css
-:root {
-  --primary: #6366f1;       /* Couleur principale */
-  --success: #10b981;       /* Couleur de succès */
-  --danger: #ef4444;        /* Couleur d'erreur */
-  --warning: #f59e0b;       /* Couleur d'avertissement */
-}
-```
+- CSS : `wwwroot/css/style.css`
+- JS : `wwwroot/js/main.js`
 
-### Modifier les données
+## 🗺️ Roadmap (prochaines étapes)
 
-Les données sont définies dans les composants Razor sous `Pages/`. Pour les modifier :
-
-1. **Statistiques** : Éditez les valeurs dans les cartes du composant Razor
-2. **Graphiques** : Mettez à jour les tableaux de données dans `wwwroot/js/main.js`
-3. **Tableaux** : Ajoutez/modifiez les lignes dans le composant Razor correspondant
-
-## 📱 Responsive Design
-
-- **Desktop** : Disposition 2 colonnes (sidebar + contenu)
-- **Tablette** : Sidebar repliée, contenu plein écran
-- **Mobile** : Disposition verticale, navigation optimisée
-
-## 🛠️ Technologies utilisées
-
-- **Blazor WebAssembly** : Framework SPA .NET 8
-- **C# / Razor** : Composants et pages
-- **CSS3** : Styling moderne avec variables CSS et Grid/Flexbox
-- **JavaScript Interop** : Sidebar, thème et Chart.js
-- **Chart.js 4.4.1** : Bibliothèque de graphiques (CDN)
-- **Font Awesome 6.5.1** : Icônes vectorielles (CDN)
-- **Google Fonts** : Police Inter (CDN)
-
-## 📦 Dépendances NuGet
-
-- `Microsoft.AspNetCore.Components.WebAssembly` 8.0.x
-- `Microsoft.AspNetCore.Components.WebAssembly.DevServer` 8.0.x
-
-## 🔗 Liens utiles
-
-- [🌐 Démo en ligne](https://mattar-shadi.github.io/dashboard-site/) - Voir le dashboard en action
-- [Documentation Blazor WebAssembly](https://learn.microsoft.com/aspnet/core/blazor/)
-- [Documentation Chart.js](https://www.chartjs.org/docs/latest/)
-- [Font Awesome Icons](https://fontawesome.com/icons)
+- Remplacer les données mock par les données du **Microsoft Partner Center** (ventes / revenus / acquisitions)
+- Remplacer une partie du JS par des composants Blazor + interop minimal
+- Ajouter un vrai modèle de données + services + gestion d’erreurs
 
 ## 📄 Licence
 
-Ce projet est sous licence MIT. Libre d'utilisation et de modification.
-
-## 👤 Auteur
-
-Créé avec ❤️ en 2026
+MIT
