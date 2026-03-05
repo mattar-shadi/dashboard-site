@@ -1,0 +1,15 @@
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <PageTitle>Page introuvable — NexusDash</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <div class="page-title">
+                <h1>Page introuvable</h1>
+                <p>La page que vous recherchez n'existe pas.</p>
+            </div>
+        </LayoutView>
+    </NotFound>
+</Router>

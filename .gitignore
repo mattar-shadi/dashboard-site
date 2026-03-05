@@ -15,6 +15,11 @@ yarn.lock
 dist/
 build/
 
+# .NET / Blazor
+bin/
+obj/
+publish/
+
 # Logs
 *.log
 npm-debug.log*

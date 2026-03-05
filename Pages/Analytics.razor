@@ -1,0 +1,61 @@
+@page "/analytics"
+@inject IJSRuntime JS
+
+<PageTitle>Analytics — NexusDash</PageTitle>
+
+<div class="page-title">
+    <h1>Analytics</h1>
+    <p>Vue d'ensemble de votre trafic et engagement</p>
+</div>
+
+<div class="stats-grid">
+    <div class="card">
+        <div class="stat-header">
+            <div class="stat-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">
+                <i class="fas fa-users"></i>
+            </div>
+            <span class="trend trend-up"><i class="fas fa-arrow-up"></i> 12.3%</span>
+        </div>
+        <span class="stat-val">18 492</span>
+        <span class="stat-label">Visiteurs uniques</span>
+    </div>
+
+    <div class="card">
+        <div class="stat-header">
+            <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">
+                <i class="fas fa-percentage"></i>
+            </div>
+            <span class="trend trend-down"><i class="fas fa-arrow-down"></i> 2.1%</span>
+        </div>
+        <span class="stat-val">34.2%</span>
+        <span class="stat-label">Taux de rebond</span>
+    </div>
+
+    <div class="card">
+        <div class="stat-header">
+            <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);">
+                <i class="fas fa-clock"></i>
+            </div>
+            <span class="trend trend-up"><i class="fas fa-arrow-up"></i> 0.8%</span>
+        </div>
+        <span class="stat-val">4m 32s</span>
+        <span class="stat-label">Durée moyenne de session</span>
+    </div>
+</div>
+
+<div class="card">
+    <h3 style="font-size: 1.1rem;">Trafic par jour</h3>
+    <div class="chart-container">
+        <canvas id="analyticsChart"></canvas>
+    </div>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("DashboardInterop.initAnalyticsChart");
+        }
+    }
+}

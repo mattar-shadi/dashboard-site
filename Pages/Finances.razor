@@ -1,0 +1,48 @@
+@page "/finances"
+@inject IJSRuntime JS
+
+<PageTitle>Finances — NexusDash</PageTitle>
+
+<div class="page-title">
+    <h1>Finances</h1>
+    <p>Analyse de vos revenus et dépenses</p>
+</div>
+
+<div class="stats-grid">
+    <div class="card">
+        <div class="stat-header">
+            <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">
+                <i class="fas fa-chart-line"></i>
+            </div>
+        </div>
+        <span class="stat-val">148 240 €</span>
+        <span class="stat-label">Revenus totaux</span>
+    </div>
+
+    <div class="card">
+        <div class="stat-header">
+            <div class="stat-icon" style="background: rgba(239, 68, 68, 0.1); color: var(--danger);">
+                <i class="fas fa-receipt"></i>
+            </div>
+        </div>
+        <span class="stat-val">52 180 €</span>
+        <span class="stat-label">Dépenses totales</span>
+    </div>
+</div>
+
+<div class="card">
+    <h3 style="font-size: 1.1rem;">Répartition des Revenus</h3>
+    <div class="chart-container">
+        <canvas id="financesChart"></canvas>
+    </div>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("DashboardInterop.initFinancesChart");
+        }
+    }
+}

@@ -1,6 +1,6 @@
-# Dashboard Moderne 2026
+# Dashboard Moderne 2026 — Blazor WebAssembly
 
-Un dashboard moderne et responsive conçu avec HTML, CSS et JavaScript. Parfait pour la gestion de données, l'analyse de ventes et le suivi des performances en temps réel.
+Un dashboard moderne et responsive construit avec **Blazor WebAssembly (.NET 8)**. Interface sombre/claire avec Chart.js, Font Awesome et navigation SPA entièrement côté client.
 
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-GitHub_Pages-6366f1?style=for-the-badge)](https://mattar-shadi.github.io/dashboard-site/)
 
@@ -12,60 +12,48 @@ Un dashboard moderne et responsive conçu avec HTML, CSS et JavaScript. Parfait 
 
 ## 🎯 Caractéristiques
 
+- **Blazor WebAssembly** : Application SPA entièrement côté client (.NET 8)
 - **Design moderne et élégant** : Interface sombre avec palette de couleurs professionnelle
 - **Responsive** : Adapté à tous les appareils (desktop, tablette, mobile)
-- **Graphiques interactifs** : Utilise Chart.js pour des visualisations dynamiques
+- **Graphiques interactifs** : Chart.js via CDN avec interop JavaScript
 - **Animations fluides** : Transitions et animations CSS pour une meilleure UX
 - **Accessibilité** : Sémantique HTML correcte et contraste optimal
-- **Performance** : Chargement rapide et optimisé
 - **Dark/Light mode** : Bascule entre mode sombre et clair avec détection automatique des préférences système
-- **Navigation dynamique** : 6 pages dédiées (Dashboard, Analytics, Clients, Commandes, Finances, Paramètres)
+- **Navigation SPA** : 6 pages Razor (Dashboard, Analytics, Clients, Commandes, Finances, Paramètres)
 
 ## 📂 Structure
 
 ```
 dashboard-site/
-├── index.html           → Page Dashboard principale
-├── analytics.html       → Section Analytics
-├── clients.html         → Section Clients
-├── commandes.html       → Section Commandes
-├── finances.html        → Section Finances
-├── parametres.html      → Section Paramètres
-├── css/
-│   └── style.css        → Styles communs
-└── js/
-    └── main.js          → JS commun (sidebar, thème, graphiques)
+├── DashboardSite.csproj    → Projet Blazor WebAssembly (.NET 8)
+├── Program.cs              → Point d'entrée Blazor
+├── App.razor               → Router Blazor
+├── _Imports.razor          → Namespaces globaux
+├── Layout/
+│   └── MainLayout.razor    → Layout partagé (sidebar + header)
+├── Pages/
+│   ├── Index.razor         → Page Dashboard (/)
+│   ├── Analytics.razor     → Page Analytics (/analytics)
+│   ├── Clients.razor       → Page Clients (/clients)
+│   ├── Commandes.razor     → Page Commandes (/commandes)
+│   ├── Finances.razor      → Page Finances (/finances)
+│   └── Parametres.razor    → Page Paramètres (/parametres)
+├── wwwroot/
+│   ├── index.html          → Shell HTML Blazor WASM
+│   ├── css/
+│   │   └── style.css       → Styles communs
+│   └── js/
+│       └── main.js         → JS interop (sidebar, thème, graphiques)
+└── .github/
+    └── workflows/
+        └── deploy.yml      → Build + déploiement GitHub Pages
 ```
 
-## 📊 Contenu
+## 🚀 Pré-requis
 
-### Sections principales
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) ou supérieur
 
-1. **Statistiques en temps réel** : 4 cartes affichant les KPIs principaux
-   - Revenus du mois
-   - Nouveaux clients
-   - Commandes
-   - Taux d'échec
-
-2. **Graphique des ventes** : Comparaison des ventes 2025 vs 2026 avec Chart.js
-   - Visualisation en ligne (line chart)
-   - Données mensuelles
-   - Légende interactive
-
-3. **Transactions récentes** : Tableau des dernières transactions avec statuts
-   - Payé ✓
-   - En attente ⏳
-   - Échoué ✗
-
-4. **Distribution des revenus** : Graphique en doughnut montrant la répartition par catégorie
-   - Produits
-   - Services
-   - Abonnements
-   - Partenariats
-
-## 🚀 Démarrage rapide
-
-### Installation locale
+## ⚡ Démarrage rapide
 
 1. Clonez le repository :
 ```bash
@@ -73,24 +61,46 @@ git clone https://github.com/mattar-shadi/dashboard-site.git
 cd dashboard-site
 ```
 
-2. Ouvrez simplement le fichier `index.html` dans votre navigateur :
+2. Restaurez les dépendances :
 ```bash
-open index.html  # macOS
-start index.html # Windows
-xdg-open index.html # Linux
+dotnet restore
 ```
 
-Ou utilisez un serveur local :
+3. Lancez l'application en développement :
 ```bash
-python -m http.server 8000
-# Puis accédez à http://localhost:8000
+dotnet run
+# Puis accédez à http://localhost:5062
 ```
+
+## 🏗️ Build & Publication
+
+```bash
+# Build
+dotnet build
+
+# Publier en mode Release
+dotnet publish -c Release -o publish
+# Les fichiers statiques se trouvent dans publish/wwwroot/
+```
+
+## 🌐 Déploiement GitHub Pages
+
+Le workflow `.github/workflows/deploy.yml` se déclenche automatiquement à chaque push sur `main` :
+
+1. Installe le SDK .NET 8
+2. Exécute `dotnet publish -c Release`
+3. Corrige le `<base href>` pour le sous-chemin `/dashboard-site/`
+4. Génère `404.html` (copie de `index.html`) pour le routing SPA
+5. Ajoute `.nojekyll` pour désactiver Jekyll
+6. Déploie sur GitHub Pages via `actions/deploy-pages`
+
+Le site est servi sous : `https://mattar-shadi.github.io/dashboard-site/`
 
 ## 🎨 Personnalisation
 
 ### Modifier les couleurs
 
-Éditez les variables CSS dans la section `:root` :
+Éditez les variables CSS dans `wwwroot/css/style.css` :
 
 ```css
 :root {
@@ -103,11 +113,11 @@ python -m http.server 8000
 
 ### Modifier les données
 
-Les données sont hardcodées dans le fichier HTML. Pour les modifier :
+Les données sont définies dans les composants Razor sous `Pages/`. Pour les modifier :
 
-1. **Statistiques** : Modifiez les valeurs dans les cartes
-2. **Graphiques** : Éditez les données dans les objets Chart.js
-3. **Tableau** : Ajoutez/modifiez les lignes du tableau
+1. **Statistiques** : Éditez les valeurs dans les cartes du composant Razor
+2. **Graphiques** : Mettez à jour les tableaux de données dans `wwwroot/js/main.js`
+3. **Tableaux** : Ajoutez/modifiez les lignes dans le composant Razor correspondant
 
 ## 📱 Responsive Design
 
@@ -117,23 +127,25 @@ Les données sont hardcodées dans le fichier HTML. Pour les modifier :
 
 ## 🛠️ Technologies utilisées
 
-- **HTML5** : Structure sémantique
+- **Blazor WebAssembly** : Framework SPA .NET 8
+- **C# / Razor** : Composants et pages
 - **CSS3** : Styling moderne avec variables CSS et Grid/Flexbox
-- **JavaScript** : Interactivité et Chart.js
-- **Chart.js** : Bibliothèque de graphiques
-- **Font Awesome** : Icônes vectorielles
+- **JavaScript Interop** : Sidebar, thème et Chart.js
+- **Chart.js 4.4.1** : Bibliothèque de graphiques (CDN)
+- **Font Awesome 6.5.1** : Icônes vectorielles (CDN)
+- **Google Fonts** : Police Inter (CDN)
 
-## 📦 Dépendances externes
+## 📦 Dépendances NuGet
 
-- [Chart.js 4.4.0](https://www.chartjs.org/) - Graphiques interactifs
-- [Font Awesome 6.5.0](https://fontawesome.com/) - Icônes
+- `Microsoft.AspNetCore.Components.WebAssembly` 8.0.x
+- `Microsoft.AspNetCore.Components.WebAssembly.DevServer` 8.0.x
 
 ## 🔗 Liens utiles
 
 - [🌐 Démo en ligne](https://mattar-shadi.github.io/dashboard-site/) - Voir le dashboard en action
+- [Documentation Blazor WebAssembly](https://learn.microsoft.com/aspnet/core/blazor/)
 - [Documentation Chart.js](https://www.chartjs.org/docs/latest/)
 - [Font Awesome Icons](https://fontawesome.com/icons)
-- [CSS Grid Guide](https://css-tricks.com/snippets/css/complete-guide-grid/)
 
 ## 📄 Licence
 
@@ -142,7 +154,3 @@ Ce projet est sous licence MIT. Libre d'utilisation et de modification.
 ## 👤 Auteur
 
 Créé avec ❤️ en 2026
-
----
-
-**Note** : Ce dashboard est un template statique. Pour l'intégrer à une vraie application, connectez-le à une API backend pour récupérer les données en temps réel.
