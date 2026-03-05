@@ -9,7 +9,7 @@
 
 <div class="card">
     <h3 style="font-size: 1.1rem;">Paramètres du compte</h3>
-    <form style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; max-width: 500px;">
+    <form @onsubmit:preventDefault style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; max-width: 500px;">
         <div>
             <label for="display-name" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Nom d'affichage</label>
             <input id="display-name" name="display-name" type="text" value="Thomas Martin" autocomplete="name" aria-required="true" required style="width: 100%; padding: 0.75rem 1rem; background: var(--bg-dark); border: 1px solid #334155; border-radius: 10px; color: var(--text); font-family: inherit; font-size: 0.95rem;" />
