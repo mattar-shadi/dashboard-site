@@ -5,8 +5,6 @@
 window.DashboardInterop = (function () {
     'use strict';
 
-    let _initialized = false;
-
     function applyTheme(theme, persist) {
         document.documentElement.setAttribute('data-theme', theme);
         if (persist) {
@@ -23,16 +21,15 @@ window.DashboardInterop = (function () {
     }
 
     function init() {
-        if (_initialized) return;
-        _initialized = true;
-
         // Sync icon at page load — no persistence
         applyTheme(document.documentElement.getAttribute('data-theme') || 'dark', false);
 
-        // Theme toggle — user click persists
+        // Theme toggle — reset listeners then re-attach
         const themeToggle = document.getElementById('themeToggle');
         if (themeToggle) {
-            themeToggle.addEventListener('click', function () {
+            const fresh = themeToggle.cloneNode(true);
+            themeToggle.parentNode.replaceChild(fresh, themeToggle);
+            fresh.addEventListener('click', function () {
                 const current = document.documentElement.getAttribute('data-theme');
                 applyTheme(current === 'dark' ? 'light' : 'dark', true);
             });
@@ -64,14 +61,25 @@ window.DashboardInterop = (function () {
             if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
         }
 
-        if (hamburgerBtn) hamburgerBtn.addEventListener('click', toggleSidebar);
-        if (overlay) overlay.addEventListener('click', toggleSidebar);
+        // Reset sidebar listeners then re-attach
+        if (hamburgerBtn) {
+            const freshBtn = hamburgerBtn.cloneNode(true);
+            hamburgerBtn.parentNode.replaceChild(freshBtn, hamburgerBtn);
+            freshBtn.addEventListener('click', toggleSidebar);
+        }
+        if (overlay) {
+            const freshOverlay = overlay.cloneNode(true);
+            overlay.parentNode.replaceChild(freshOverlay, overlay);
+            freshOverlay.addEventListener('click', toggleSidebar);
+        }
 
         // Auto-close sidebar on resize
         window.addEventListener('resize', function () {
             if (window.innerWidth > 992) {
-                if (sidebar) sidebar.classList.remove('open');
-                if (overlay) overlay.classList.remove('active');
+                const s = document.getElementById('sidebar');
+                const o = document.getElementById('overlay');
+                if (s) s.classList.remove('open');
+                if (o) o.classList.remove('active');
             }
         });
     }
