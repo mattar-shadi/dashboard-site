@@ -4,6 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>MATTAR Dashboard</AssemblyName>
+    <RootNamespace>MATTAR.Dashboard</RootNamespace>
+    <PackageId>MATTAR Dashboard</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

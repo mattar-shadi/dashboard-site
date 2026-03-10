@@ -1,4 +1,4 @@
-# DashboardSite — Blazor WebAssembly (WASM)
+# MATTAR Dashboard — Blazor WebAssembly (WASM)
 
 Dashboard UI moderne (template) construit en **Blazor WebAssembly (.NET 8)** et déployé sur **GitHub Pages**.
 
@@ -19,7 +19,7 @@ Dashboard UI moderne (template) construit en **Blazor WebAssembly (.NET 8)** et 
 
 ```
 .
-├── DashboardSite.csproj
+├── MATTAR Dashboard.csproj
 ├── Program.cs
 ├── App.razor
 ├── _Imports.razor
